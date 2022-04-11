@@ -1,6 +1,6 @@
 #pragma once
-#ifndef QuickPID_h
-#define QuickPID_h
+
+#include <cstdint>
 
 class QuickPID {
 
@@ -106,4 +106,4 @@ class QuickPID {
     float outputSum, outMin, outMax, error, lastError, lastInput;
 
 }; // class QuickPID
-#endif // QuickPID.h
+

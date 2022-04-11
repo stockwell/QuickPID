@@ -4,13 +4,16 @@
    Based on the Arduino PID_v1 Library. Licensed under the MIT License.
  **********************************************************************************/
 
-#if ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
 #include "QuickPID.h"
+
+#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+
+#include "esp_timer.h"
+
+static unsigned long micros()
+{
+    return esp_timer_get_time();
+}
 
 /* Constructor ********************************************************************
    The parameters specified here are those for for which we can't set up
@@ -46,17 +49,6 @@ QuickPID::QuickPID(float* Input, float* Output, float* Setpoint,
                        dmode = dMode::dOnMeas,
                        iawmode = iAwMode::iAwCondition,
                        action = Action) {
-}
-
-/* Constructor *********************************************************************
-   Simplified constructor which uses defaults for remaining parameters.
- **********************************************************************************/
-QuickPID::QuickPID(float* Input, float* Output, float* Setpoint)
-  : QuickPID::QuickPID(Input, Output, Setpoint, dispKp, dispKi, dispKd,
-                       pmode = pMode::pOnError,
-                       dmode = dMode::dOnMeas,
-                       iawmode = iAwMode::iAwCondition,
-                       action = Action::direct) {
 }
 
 /* Compute() ***********************************************************************

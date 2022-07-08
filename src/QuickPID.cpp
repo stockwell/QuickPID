@@ -106,6 +106,11 @@ bool QuickPID::Compute() {
   else return false;
 }
 
+bool QuickPID::Ready() const
+{
+	return (micros() - lastTime) >= sampleTimeUs;
+}
+
 /* SetTunings(....)************************************************************
   This function allows the controller's dynamic performance to be adjusted.
   it's called automatically from the constructor, but tunings can also

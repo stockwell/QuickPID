@@ -32,6 +32,8 @@ class QuickPID {
     // can be set using SetMode and SetSampleTime respectively.
     bool Compute();
 
+	bool Ready() const;
+
     // Sets and clamps the output to a specific range (0-255 by default).
     void SetOutputLimits(float Min, float Max);
 
